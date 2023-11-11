@@ -1,4 +1,7 @@
-using CosmosDBExemple.Services;
+using CosmosDBExemple.Services;   
+
+//  Está no emulador.
+
 
 var builder = WebApplication.CreateBuilder(args);
 

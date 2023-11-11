@@ -1,8 +1,9 @@
 ﻿using CosmosDBExample.Config;
-using CosmosDBExample.Models;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using System.Linq.Expressions;
+
+//  Está no emulador.
 
 namespace CosmosDBExemple.Data
 {

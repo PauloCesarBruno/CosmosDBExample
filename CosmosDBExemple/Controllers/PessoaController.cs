@@ -2,6 +2,8 @@ using CosmosDBExample.Models;
 using CosmosDBExemple.Services;
 using Microsoft.AspNetCore.Mvc;
 
+//  Está no emulador.
+
 namespace CosmosDBExemple.Controllers
 {
     [ApiController]
