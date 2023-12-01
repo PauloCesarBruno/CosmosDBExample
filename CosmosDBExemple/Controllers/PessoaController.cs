@@ -26,7 +26,14 @@ namespace CosmosDBExemple.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetPessoasPorId(string id)
+        {
+            var result = await _pessoasService.GetPessoasPorId(id);
+            return Ok(result);
+        }
+
+        [HttpGet("name/{name}")]
         public async Task<IActionResult> Get(string name)
         {
             var result = await _pessoasService.GetPessoasPorNome(name);

@@ -19,14 +19,19 @@ namespace CosmosDBExemple.Services
             return await _noSQLDataBase.GetAllItens(container);
         }
 
+        public async Task<IEnumerable<Pessoa>> GetPessoasPorId(string id)
+        {
+            return await _noSQLDataBase.GetByPredicate(container, i => i.Id == id);
+        }
+
         public async Task<IEnumerable<Pessoa>> GetPessoasPorNome(string name)
         {
-            return await _noSQLDataBase.GetByPredicate(container, m => m.Nome == name);
+            return await _noSQLDataBase.GetByPredicate(container, n => n.Nome == name);
         }
 
         public async Task AddPessoa(Pessoa pessoa)
         {
             await _noSQLDataBase.Add(container, pessoa, pessoa.Id.ToString());
-        }
+        }          
     }
 }

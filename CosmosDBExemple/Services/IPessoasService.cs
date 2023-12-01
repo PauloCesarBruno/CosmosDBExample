@@ -8,6 +8,8 @@ namespace CosmosDBExemple.Services
 
         Task<IEnumerable<Pessoa>> GetPessoasPorNome(string name);
 
+        Task<IEnumerable<Pessoa>> GetPessoasPorId(string id);   
+
         Task AddPessoa(Pessoa pessoa);
     }
 }
