@@ -29,8 +29,23 @@ namespace CosmosDBExemple.Controllers
         [HttpGet("id/{id}")]
         public async Task<IActionResult> GetPessoasPorId(string id)
         {
-            var result = await _pessoasService.GetPessoasPorId(id);
-            return Ok(result);
+            try
+            {
+                var existingPessoa = await _pessoasService.GetPessoasPorId(id);
+                if (existingPessoa == null)
+                {
+                    return NotFound();
+                }
+
+                var result = await _pessoasService.GetPessoasPorId(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
         }
 
         [HttpGet("name/{name}")]
@@ -45,6 +60,52 @@ namespace CosmosDBExemple.Controllers
         {
             await _pessoasService.AddPessoa(pessoa);
             return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, Pessoa pessoa)
+        {
+            try
+            {
+                var existingPessoa = await _pessoasService.GetPessoasPorId(id);
+
+                if (existingPessoa == null)
+                {
+                    return NotFound("Codigo não localizado !");
+                }
+
+                await _pessoasService.UpdatePessoa(id, pessoa);
+
+                return Ok(pessoa);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Id tem que ser igual ao Request body.");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                var existingPessoa = await _pessoasService.GetPessoasPorId(id);
+
+                if (existingPessoa == null)
+                {
+                    return NotFound();
+                }
+
+                await _pessoasService.DeletePessoa(id);
+
+                return Ok(id);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Id não localizado.");
+            }
         }
     }
 }

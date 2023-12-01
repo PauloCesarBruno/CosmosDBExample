@@ -32,6 +32,16 @@ namespace CosmosDBExemple.Services
         public async Task AddPessoa(Pessoa pessoa)
         {
             await _noSQLDataBase.Add(container, pessoa, pessoa.Id.ToString());
-        }          
+        }                 
+
+        public async Task UpdatePessoa(string Id, Pessoa pessoa)
+        {
+            await _noSQLDataBase.UpdatePessoa(container, Id, pessoa);
+        }
+
+        public async Task DeletePessoa(string Id)
+        {
+            await _noSQLDataBase.DeletePessoa(container, Id);
+        }
     }
 }

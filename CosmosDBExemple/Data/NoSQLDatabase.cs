@@ -62,5 +62,25 @@ namespace CosmosDBExemple.Data
 
             await container.CreateItemAsync<T>(data, new PartitionKey(id));
         }
+
+        public async Task UpdatePessoa(string containerId, string id, T data)
+        {
+            CosmosClient cosmosClient = new(EndpointUri, PrimaryKey);
+
+            Database database = cosmosClient.GetDatabase(databaseId);
+            Container container = database.GetContainer(containerId);
+
+            await container.UpsertItemAsync<T>(data, new PartitionKey(id));
+        }
+
+        public async Task DeletePessoa(string containerId, string id)
+        {
+            CosmosClient cosmosClient = new(EndpointUri, PrimaryKey);
+
+            Database database = cosmosClient.GetDatabase(databaseId);
+            Container container = database.GetContainer(containerId);
+
+            await container.DeleteItemAsync<T>(id, new PartitionKey(id));
+        }
     }
 }
